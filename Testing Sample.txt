@@ -1,0 +1,6 @@
+Software Testing,CSE337s,100
+Mohammed Adel,1900180s,10,10,20,-59
+Mohamed  Farouk,1901472s,10,10,20,60
+Nada Waleed,1901544s,10,10,20,60
+Ather El Sayed,1901066s,10,10,20,70
+Nour Osama,1901749s,10,10,20,60
