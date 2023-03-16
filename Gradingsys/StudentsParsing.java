@@ -14,6 +14,7 @@ public class StudentsParsing {
         try
         {
             FileReader fileReader = new FileReader(file);
+            System.out.println();
             BufferedReader bufferreader = new BufferedReader(fileReader);
             //Parsing the header line
             String[] initial_line = bufferreader.readLine().trim().split(",");
