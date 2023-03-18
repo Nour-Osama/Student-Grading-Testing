@@ -3,7 +3,6 @@ package Gradingsys;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-// todo: make any validation check toggle valid to false if it turns out to be invalid
 public class Student {
     private String name;
     private String code;
@@ -13,17 +12,51 @@ public class Student {
     private String grade;
     private boolean validateName(String name){
         boolean isValid = true;
-        // some validation
+        //check if name contains only alphabet letters
+        if(!Validation.isAlpha(name)) {
+            System.out.println("Error with name: " + name);
+            System.out.println("name should contain alphabet and spaces only");
+            isValid = false;
+        }
         return isValid;
     }
     private boolean validateCode(String code){
         boolean isValid = true;
-        // some validation
+        if(code.length() == 8 || code.length() == 7){
+            if(!Validation.isNumeric(code.substring(0,7))) {
+                System.out.println("Error with the student code");
+                isValid = false;
+            }
+        }
+        else if (code.length() != 8 || code.length() != 7){
+            System.out.println("Error with the student code length");
+            isValid = false;
+        }
         return isValid;
     }
     private boolean validateMarks(String[] marks,int maxTotal){
         boolean isValid = true;
-        // some validation
+        //Checking marks for errors
+        if(Double.parseDouble(marks[0]) < 0 || Double.parseDouble(marks[0]) > 10) {
+            System.out.println("Error with the student activities mark of " + this.name);
+            valid = false;
+            isValid = false;
+        }
+        if(Double.parseDouble(marks[1]) < 0 || Double.parseDouble(marks[1]) > 10){
+            System.out.println("Error with the Practical mark of "+this.name);
+            valid = false;
+            isValid = false;
+        }
+        if(Double.parseDouble(marks[2]) < 0 || Double.parseDouble(marks[2]) > 20) {
+            System.out.println("Error with the Midterm mark of " + this.name);
+            valid = false;
+            isValid = false;
+        }
+        if(Double.parseDouble(marks[3]) < 0 || Double.parseDouble(marks[3]) > 60) {
+            System.out.println("Error with the Final mark of " + this.name);
+            valid = false;
+            isValid = false;
+        }
         return isValid;
     }
     @Override
@@ -61,7 +94,7 @@ public class Student {
             String final_mark = info[5].substring(0,info[5].length()-1);
             this.marks = validateMarks(new String[]{info[2], info[3], info[4], info[5]}, maxTotal) ?
                     new int[]{Integer.parseInt(info[2]), Integer.parseInt(info[3]),
-                            Integer.parseInt(info[4]), Integer.parseInt(final_mark)} :
+                            Integer.parseInt(info[4]), Integer.parseInt(info[5])} :
                     new int[]{-1, -1, -1, -1};
         }
         this.gpa = -1;

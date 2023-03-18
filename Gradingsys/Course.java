@@ -7,17 +7,30 @@ public class Course {
     private boolean valid;
     private boolean validateName(String name){
         boolean isValid = true;
-        // some validation
+        if(!Validation.isAlphaNumeric(name)){
+            System.out.println("Error with course name: " + this.name);
+            valid = false;
+            isValid = false;
+        }
         return isValid;
     }
     private boolean validateCode(String code){
         boolean isValid = true;
-        // some validation
+        if((code.length() < 6) || (code.length() > 7)){
+            isValid = false;
+        }
+        if(!Validation.isAlpha(code.substring(0,3)) && !Validation.isNumeric(code.substring(3,6))){
+            System.out.println("Error with the course code");
+            isValid = false;
+        }
         return isValid;
     }
     private boolean validateTotal(String total){
         boolean isValid = true;
-        // some validation
+        if(Double.parseDouble(total) != 100){
+            System.out.println("Invalid Full mark, Should be 100");
+            valid = false;
+        }
         return isValid;
     }
     public Course(String[] info) {
@@ -31,8 +44,7 @@ public class Course {
             this.valid = true;
             this.name = (validateName(info[0])) ? info[0] : "Invalid Name";
             this.code = (validateCode(info[1])) ? info[1] : "Invalid Code";
-            String total_mark = info[2].substring(0,info[2].length()-1);
-            this.total = (validateTotal(info[2])) ? Integer.parseInt(total_mark) : -1;
+            this.total = (validateTotal(info[2])) ? Integer.parseInt(info[2] ) : -1;
         }
     }
 

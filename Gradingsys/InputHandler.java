@@ -33,8 +33,13 @@ public class InputHandler {
     public List<String[]> getParsedContent(){return parsedContent;}
     public void parseContent(){
         String[] lines = content.split("\n",0);
-        for(String line: lines){
-            parsedContent.add(line.split(",",0));
+        for(int i =0; i < lines.length;i++){
+            String line = lines[i];
+            String[] csLine = line.split(",",0);
+            String lastWord = csLine[csLine.length-1];
+            String lastChar = lastWord.substring(lastWord.length() - 1);
+            csLine[csLine.length-1] = (i < lines.length) ? lastWord.substring(0,lastWord.length()-1) : lastWord ;
+            parsedContent.add(csLine);
         }
     }
 
