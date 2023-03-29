@@ -7,29 +7,61 @@ public class Course {
     private boolean valid;
     private boolean validateName(String name){
         boolean isValid = true;
-        if(!Validation.isAlphaNumeric(name)){
-            System.out.println("Error with course name: " + this.name);
+        try {
+            if (!Validation.isAlphaNumeric(name)) {
+                System.out.println("Error with course name: " + this.name);
+                valid = false;
+                isValid = false;
+            }
+        }
+        catch(StringIndexOutOfBoundsException e){
             valid = false;
             isValid = false;
+            return isValid;
         }
         return isValid;
     }
     private boolean validateCode(String code){
         boolean isValid = true;
-        if((code.length() < 6) || (code.length() > 7)){
-            isValid = false;
+        try {
+            if ((code.length() < 6) || (code.length() > 7)) {
+                isValid = false;
+                valid = false;
+            }
+            if (!Validation.isAlpha(code.substring(0, 3)) || !Validation.isNumeric(code.substring(3, 6))) {
+                System.out.println("Error with the course code");
+                isValid = false;
+                valid = false;
+            }
+            if(code.charAt(5) == 'F' || code.charAt(5) == 'f'){
+                isValid = false;
+                valid = false;
+            }
+            if(code.length() == 7){
+                if(code.charAt(6) != 's'){
+                    isValid = false;
+                    valid = false;
+                }
+            }
         }
-        if(!Validation.isAlpha(code.substring(0,3)) && !Validation.isNumeric(code.substring(3,6))){
-            System.out.println("Error with the course code");
+        catch(StringIndexOutOfBoundsException e){
             isValid = false;
+            valid = false;
         }
         return isValid;
     }
     private boolean validateTotal(String total){
         boolean isValid = true;
-        if(Double.parseDouble(total) != 100){
-            System.out.println("Invalid Full mark, Should be 100");
+        try {
+            if (Double.parseDouble(total) != 100) {
+                System.out.println("Invalid Full mark, Should be 100");
+                valid = false;
+            }
+        }
+        catch(Exception e){
             valid = false;
+            isValid = false;
+            return isValid;
         }
         return isValid;
     }

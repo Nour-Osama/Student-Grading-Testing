@@ -13,49 +13,83 @@ public class Student {
     private boolean validateName(String name){
         boolean isValid = true;
         //check if name contains only alphabet letters
-        if(!Validation.isAlpha(name)) {
-            System.out.println("Error with name: " + name);
-            System.out.println("name should contain alphabet and spaces only");
+        try {
+            if (!Validation.isAlpha(name)) {
+                System.out.println("Error with name: " + name);
+                System.out.println("name should contain alphabet and spaces only");
+                isValid = false;
+            }
+        }
+        catch(StringIndexOutOfBoundsException e){
             isValid = false;
+            valid = false;
+            System.out.println("Invalid student name");
         }
         return isValid;
     }
     private boolean validateCode(String code){
         boolean isValid = true;
-        if(code.length() == 8 || code.length() == 7){
-            if(!Validation.isNumeric(code.substring(0,7))) {
-                System.out.println("Error with the student code");
+        try {
+            if (code.length() == 7 || code.length() == 8) {
+                if (!Validation.isNumeric(code.substring(0, 7))) {
+                    System.out.println("Error with the student code");
+                    isValid = false;
+                    valid = false;
+                }
+                try{
+                    if(code.charAt(7) != 's'){
+                        valid = false;
+                        isValid = false;
+                    }
+                }
+                catch(Exception e){
+                    System.out.println("7 characters..");
+                }
+            }
+            else{
+                valid = false;
                 isValid = false;
+                System.out.println("Invalid code length");
             }
         }
-        else if (code.length() != 8 || code.length() != 7){
-            System.out.println("Error with the student code length");
+        catch(Exception e){
             isValid = false;
+            valid = false;
+            System.out.println("invalid student code");
         }
         return isValid;
     }
     private boolean validateMarks(String[] marks,int maxTotal){
         boolean isValid = true;
-        //Checking marks for errors
-        if(Double.parseDouble(marks[0]) < 0 || Double.parseDouble(marks[0]) > 10) {
-            System.out.println("Error with the student activities mark of " + this.name);
-            valid = false;
-            isValid = false;
+        try {
+            //Checking marks for errors
+            if (Double.parseDouble(marks[0]) < 0 || Double.parseDouble(marks[0]) > 10) {
+                System.out.println("Error with the student activities mark of " + this.name);
+                valid = false;
+                isValid = false;
+            }
+            if (Double.parseDouble(marks[1]) < 0 || Double.parseDouble(marks[1]) > 10) {
+                System.out.println("Error with the Practical mark of " + this.name);
+                valid = false;
+                isValid = false;
+            }
+            if (Double.parseDouble(marks[2]) < 0 || Double.parseDouble(marks[2]) > 20) {
+                System.out.println("Error with the Midterm mark of " + this.name);
+                valid = false;
+                isValid = false;
+            }
+            if (Double.parseDouble(marks[3]) < 0 || Double.parseDouble(marks[3]) > 60) {
+                System.out.println("Error with the Final mark of " + this.name);
+                valid = false;
+                isValid = false;
+            }
+
         }
-        if(Double.parseDouble(marks[1]) < 0 || Double.parseDouble(marks[1]) > 10){
-            System.out.println("Error with the Practical mark of "+this.name);
-            valid = false;
+        catch(Exception e){
             isValid = false;
-        }
-        if(Double.parseDouble(marks[2]) < 0 || Double.parseDouble(marks[2]) > 20) {
-            System.out.println("Error with the Midterm mark of " + this.name);
             valid = false;
-            isValid = false;
-        }
-        if(Double.parseDouble(marks[3]) < 0 || Double.parseDouble(marks[3]) > 60) {
-            System.out.println("Error with the Final mark of " + this.name);
-            valid = false;
-            isValid = false;
+            System.out.println("invalid marks");
+            return isValid;
         }
         return isValid;
     }
@@ -91,7 +125,6 @@ public class Student {
             this.valid = true;
             this.name = (validateName(info[0])) ? info[0] : "Invalid Name";
             this.code = (validateCode(info[1])) ? info[1] : "Invalid Code";
-            String final_mark = info[5].substring(0,info[5].length()-1);
             this.marks = validateMarks(new String[]{info[2], info[3], info[4], info[5]}, maxTotal) ?
                     new int[]{Integer.parseInt(info[2]), Integer.parseInt(info[3]),
                             Integer.parseInt(info[4]), Integer.parseInt(info[5])} :

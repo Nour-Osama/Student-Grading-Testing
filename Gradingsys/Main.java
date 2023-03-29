@@ -26,7 +26,7 @@ public class Main {
             }
         }
         else{
-            fileData = "Total Marks for Course is invalid.";
+            fileData = "Invalid course information!";
         }
         String fileName = course.getCode() + " " + course.getName() + " results.txt";
         OutputHandler outputHandler = new OutputHandler(fileName,fileData);

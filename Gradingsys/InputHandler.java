@@ -38,7 +38,10 @@ public class InputHandler {
             String[] csLine = line.split(",",0);
             String lastWord = csLine[csLine.length-1];
             String lastChar = lastWord.substring(lastWord.length() - 1);
-            csLine[csLine.length-1] = (i < lines.length) ? lastWord.substring(0,lastWord.length()-1) : lastWord ;
+            if(i == lines.length-1){
+                System.out.println("fail");
+            }
+            csLine[csLine.length-1] = ("\r".equals(lastChar)) ? lastWord.substring(0,lastWord.length()-1) : lastWord ;
             parsedContent.add(csLine);
         }
     }
