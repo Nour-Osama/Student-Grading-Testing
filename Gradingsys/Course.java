@@ -8,7 +8,7 @@ public class Course {
     private boolean validateName(String name){
         boolean isValid = true;
         try {
-            if (!Validation.isAlphaNumeric(name)) {
+            if (!Validation.isAlpha(name)) {
                 System.out.println("Error with course name: " + this.name);
                 valid = false;
                 isValid = false;
@@ -53,12 +53,12 @@ public class Course {
     private boolean validateTotal(String total){
         boolean isValid = true;
         try {
-            if (Double.parseDouble(total) != 100) {
-                System.out.println("Invalid Full mark, Should be 100");
+            if (Integer.parseInt(total) != 100) {
                 valid = false;
             }
         }
         catch(Exception e){
+            System.out.println("Invalid Full mark, Should be 100");
             valid = false;
             isValid = false;
             return isValid;

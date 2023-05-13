@@ -31,8 +31,5 @@ public class Main {
         String fileName = course.getCode() + " " + course.getName() + " results.txt";
         OutputHandler outputHandler = new OutputHandler(fileName,fileData);
         System.out.println(fileData);
-        //System.out.println(inputHandler.getParsedContent().get(0)[2]);
-        //ArrayList<String[]> data = StudentsParsing.parse(path);
-        //System.out.println(data.get(4)[0]);
     }
 }

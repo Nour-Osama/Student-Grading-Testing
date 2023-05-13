@@ -20,7 +20,13 @@ public class InputHandler {
                 stringBuilder.append(ls);
             }
             // delete the last new line separator
-            stringBuilder.deleteCharAt(stringBuilder.length() - 1);
+            try {
+                stringBuilder.deleteCharAt(stringBuilder.length() - 1);
+            }
+            catch(StringIndexOutOfBoundsException e){
+                System.out.println("File is empty!");
+                System.exit(-1);
+            }
             reader.close();
             content = stringBuilder.toString();
         }
