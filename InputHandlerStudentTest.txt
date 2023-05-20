@@ -1,0 +1,2 @@
+Software Testing,CSE337s,100
+Mohammed 3del,1900180s,10,10,20,-59

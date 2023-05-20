@@ -1,0 +1,2 @@
+Software Testing,CSE337s,100
+Mohamed  Farouk,1901472s,10,10,20,60
